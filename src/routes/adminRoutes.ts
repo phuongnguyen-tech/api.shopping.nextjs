@@ -4,16 +4,16 @@ import {
   createAdmin,
   deleteAdmin,
   getAdminById,
-  getAllAdmins,
+  getAllAdmin,
   updateAdmin,
 } from "../controllers/adminController";
 
 const router = Router();
 
-router.get("/", getAllAdmins);
-router.get("/:id", authenticate, getAdminById);
+router.get("/", getAllAdmin);
+router.get("/:id", getAdminById);
 router.post("/", createAdmin);
-router.put("/:id", authenticate, updateAdmin);
-router.delete("/:id", authenticate, deleteAdmin);
+router.put("/:id", updateAdmin);
+router.delete("/:id", deleteAdmin);
 
 export default router;

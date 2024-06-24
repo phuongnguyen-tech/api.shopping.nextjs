@@ -1,35 +1,23 @@
 // src/controllers/productController.ts
 import { Request, Response } from "express";
-import productsData from "../data/products";
-import { Product } from "../models/products";
+import { Product } from "../entities/product";
 import { v4 as uuidv4 } from "uuid";
+import { productRepository } from "../repository/ProductRepository";
 
-let products = [...productsData];
-
-// POST /api/products
-export const createProduct = (req: Request, res: Response) => {
-  const { name, description, price, bannerUrl, quantity, categoryId } =
-    req.body;
-
-  const newProduct: Product = {
-    id: uuidv4(),
-    name,
-    description,
-    price,
-    bannerUrl,
-    quantity,
-    categoryId,
-    createdAt: new Date(), // Thêm createdAt ở đây
-  };
-
-  products.push(newProduct);
-  res.status(201).json(newProduct.id);
+// GET /api/products
+export const getAllProducts = async (req: Request, res: Response) => {
+  try {
+    const products = await productRepository.getAll();
+    res.json(products);
+  } catch (error) {
+    res.status(404).json({ message: "Failed to fetch products" });
+  }
 };
 
 // GET /api/products/:id
-export const getProductById = (req: Request, res: Response) => {
+export const getProductById = async (req: Request, res: Response) => {
   const productId = req.params.id;
-  const product = products.find((p) => p.id === productId);
+  const product = await productRepository.getById(productId);
   if (product) {
     res.json(product);
   } else {
@@ -37,31 +25,44 @@ export const getProductById = (req: Request, res: Response) => {
   }
 };
 
-// GET /api/products
-export const getAllProducts = (req: Request, res: Response) => {
-  // Sắp xếp danh sách sản phẩm theo createdAt (giảm dần)
-  const sortedProducts = products.sort(
-    (a, b) => b.createdAt.getTime() - a.createdAt.getTime()
-  );
-  res.json(sortedProducts);
+// POST /api/products
+export const createProduct = (req: Request, res: Response) => {
+  const { name, description, price, bannerUrl, quantity, categoryId } =
+    req.body;
+
+  const checkProductName = productRepository.getByProductName(name);
+  if (!checkProductName) {
+    const newProduct: Product = {
+      id: uuidv4(),
+      name,
+      description,
+      price,
+      bannerUrl,
+      quantity,
+      categoryId,
+      createdAt: new Date(), // Thêm createdAt ở đây
+    };
+
+    productRepository.create(newProduct);
+    res.status(201).json(newProduct.id);
+  } else res.status(404).json({ message: "Product already exist" });
 };
 
 // PUT /api/products/:id
-export const updateProduct = (req: Request, res: Response) => {
-  const productId = req.params.id;
-  const updatedProduct: Product = req.body;
-  const index = products.findIndex((p) => p.id === productId);
-  if (index !== -1) {
-    products[index] = updatedProduct;
-    res.json(productId);
-  } else {
-    res.status(404).json({ message: "Product not found" });
-  }
+export const updateProduct = async (req: Request, res: Response) => {
+  const requestBody: Product = req.body;
+  await productRepository
+    .update(requestBody)
+    .then((r) => {
+      res.json(r.id);
+    })
+    .catch((error) => res.status(404).json({ message: "Product not found" }));
 };
 
 // DELETE /api/products/:id
-export const deleteProduct = (req: Request, res: Response) => {
+export const deleteProduct = async (req: Request, res: Response) => {
   const productId = req.params.id;
-  products = products.filter((p) => p.id !== productId);
+  await productRepository.delete(productId);
+
   res.json({ message: "Product deleted successfully" });
 };

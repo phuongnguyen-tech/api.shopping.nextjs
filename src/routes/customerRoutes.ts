@@ -10,10 +10,10 @@ import {
 
 const router = Router();
 
-router.get("/", authenticate, getAllCustomers);
-router.get("/:id", authenticate, getCustomerById);
+router.get("/", getAllCustomers);
+router.get("/:id", getCustomerById);
 router.post("/", createCustomer);
-router.put("/:id", authenticate, updateCustomer);
-router.delete("/:id", authenticate, deleteCustomer);
+router.put("/:id", updateCustomer);
+router.delete("/:id", deleteCustomer);
 
 export default router;

@@ -1,4 +1,4 @@
-import { BaseEntity } from "../models/BaseEntity";
+import { BaseEntity } from "../entities/BaseEntity";
 import { Paging } from "./Paging";
 
 export class BaseRepository<T extends BaseEntity> {

@@ -1,6 +1,6 @@
 import { BaseEntity } from "./BaseEntity";
 
-export interface Admins extends BaseEntity {
+export interface Admin extends BaseEntity {
   username: string;
   password: string;
   fullName?: string;
