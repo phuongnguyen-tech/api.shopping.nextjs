@@ -1,0 +1,110 @@
+import { Product } from "../models/products";
+
+
+
+
+
+const products: Product[] = [
+  {
+    id: "1",
+    name: "Áo sơ mi trắng",
+    description: "Áo sơ mi nam màu trắng đơn giản",
+    price: 25.99,
+    bannerUrl: "https://example.com/ao-so-mi-trang.jpg",
+    quantity: 50,
+    categoryId: "1",
+    createdAt: new Date("2023-01-01"), // Thêm ngày cụ thể cho createdAt
+  },
+  {
+    id: "2",
+    name: "Quần jean nam",
+    description: "Quần jean nam màu xanh đậm",
+    price: 39.99,
+    bannerUrl: "https://example.com/quan-jean-nam.jpg",
+    quantity: 30,
+    categoryId: "1",
+    createdAt: new Date("2023-01-02"),
+  },
+  {
+    id: "3",
+    name: "Áo thun nữ",
+    description: "Áo thun nữ màu hồng pastel",
+    price: 12.5,
+    bannerUrl: "https://example.com/ao-thun-nu.jpg",
+    quantity: 80,
+    categoryId: "2",
+    createdAt: new Date("2023-01-03"),
+  },
+  {
+    id: "4",
+    name: "Váy công sở",
+    description: "Váy công sở dài màu đen",
+    price: 29.75,
+    bannerUrl: "https://example.com/vay-cong-so.jpg",
+    quantity: 20,
+    categoryId: "2",
+    createdAt: new Date("2023-01-04"),
+  },
+  {
+    id: "5",
+    name: "Áo khoác nam",
+    description: "Áo khoác nam dáng dài màu xám",
+    price: 45.0,
+    bannerUrl: "https://example.com/ao-khoac-nam.jpg",
+    quantity: 15,
+    categoryId: "1",
+    createdAt: new Date("2023-01-05"),
+  },
+  {
+    id: "6",
+    name: "Đầm dự tiệc",
+    description: "Đầm dự tiệc màu đỏ",
+    price: 55.25,
+    bannerUrl: "https://example.com/dam-du-tiec.jpg",
+    quantity: 25,
+    categoryId: "2",
+    createdAt: new Date("2023-01-06"),
+  },
+  {
+    id: "7",
+    name: "Áo khoác nữ",
+    description: "Áo khoác nữ dáng dài màu xanh lá cây",
+    price: 42.0,
+    bannerUrl: "https://example.com/ao-khoac-nu.jpg",
+    quantity: 18,
+    categoryId: "2",
+    createdAt: new Date("2023-01-07"),
+  },
+  {
+    id: "8",
+    name: "Quần tây nam",
+    description: "Quần tây nam màu xám sáng",
+    price: 34.99,
+    bannerUrl: "https://example.com/quan-tay-nam.jpg",
+    quantity: 22,
+    categoryId: "1",
+    createdAt: new Date("2023-01-08"),
+  },
+  {
+    id: "9",
+    name: "Áo khoác dù unisex",
+    description: "Áo khoác dù unisex màu đen",
+    price: 59.0,
+    bannerUrl: "https://example.com/ao-khoac-du.jpg",
+    quantity: 12,
+    categoryId: "1",
+    createdAt: new Date("2023-01-09"),
+  },
+  {
+    id: "10",
+    name: "Áo len nữ",
+    description: "Áo len nữ màu xanh pastel",
+    price: 28.5,
+    bannerUrl: "https://example.com/ao-len-nu.jpg",
+    quantity: 35,
+    categoryId: "2",
+    createdAt: new Date("2023-01-10"),
+  },
+];
+
+export default products;
