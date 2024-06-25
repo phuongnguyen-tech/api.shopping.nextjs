@@ -8,12 +8,18 @@ import adminRoutes from "./routes/adminRoutes";
 import categoryRoutes from "./routes/categoryRoutes";
 import orderDetailRoutes from "./routes/orderDetailRoutes";
 import orderRoutes from "./routes/orderRoutes";
+import cors from "cors";
 
 dotenv.config();
 
 const app = express();
 
 app.use(bodyParser.json());
+
+const corsOptions = {
+  origin: "http://localhost:3000",
+};
+app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
   next();

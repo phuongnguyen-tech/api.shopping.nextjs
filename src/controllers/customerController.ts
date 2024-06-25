@@ -22,24 +22,29 @@ export const getCustomerById = async (req: Request, res: Response) => {
 
 // POST /api/customers
 export const createCustomer = async (req: Request, res: Response) => {
-  const { email, phone, address, firstName, lastName, password } =
-    req.body;
+  const { email, phone, address, firstName, lastName, password } = req.body;
 
-  const hashedPassword = await bcrypt.hash(password, 10);
+  const checkPhone = await customerRepository.getByPhone(phone);
 
-  const newCustomer: Customer = {
-    id: uuidv4(),
-    email,
-    phone,
-    address,
-    firstName,
-    lastName,
-    password: hashedPassword,
-    createdAt: new Date(),
-  };
+  if (checkPhone == null) {
+    const hashedPassword = await bcrypt.hash(password, 10);
 
-  customerRepository.create(newCustomer);
-  res.status(201).json(newCustomer.id);
+    const newCustomer: Customer = {
+      id: uuidv4(),
+      email,
+      phone,
+      address,
+      firstName,
+      lastName,
+      password: hashedPassword,
+      createdAt: new Date(),
+    };
+
+    customerRepository.create(newCustomer);
+    res.status(201).json(newCustomer.id);
+  } else {
+    res.status(404).json({ message: "Customer already exist" });
+  }
 };
 
 // PUT /api/customers/:id

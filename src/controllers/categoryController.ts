@@ -26,10 +26,10 @@ export const getCategoryById = async (req: Request, res: Response) => {
 };
 
 // POST /api/categories
-export const createCategory = (req: Request, res: Response) => {
+export const createCategory = async (req: Request, res: Response) => {
   const { name } = req.body;
 
-  const checkCategoryName = categoryRepository.getByCategoryName(name);
+  const checkCategoryName = await categoryRepository.getByCategoryName(name);
   if (!checkCategoryName) {
     const newCategory: Category = {
       id: uuidv4(),

@@ -26,12 +26,12 @@ export const getProductById = async (req: Request, res: Response) => {
 };
 
 // POST /api/products
-export const createProduct = (req: Request, res: Response) => {
+export const createProduct = async (req: Request, res: Response) => {
   const { name, description, price, bannerUrl, quantity, categoryId } =
     req.body;
 
-  const checkProductName = productRepository.getByProductName(name);
-  if (!checkProductName) {
+  const checkProductName = await productRepository.getByProductName(name);
+  if (checkProductName == null) {
     const newProduct: Product = {
       id: uuidv4(),
       name,
@@ -56,7 +56,7 @@ export const updateProduct = async (req: Request, res: Response) => {
     .then((r) => {
       res.json(r.id);
     })
-    .catch((error) => res.status(404).json({ message: "Product not found" }));
+    .catch((error) => res.status(404).json({ message: "Customer not found" }));
 };
 
 // DELETE /api/products/:id
