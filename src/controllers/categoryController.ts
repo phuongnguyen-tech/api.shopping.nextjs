@@ -60,3 +60,13 @@ export const deleteCategory = async (req: Request, res: Response) => {
 
   res.json({ message: "Category deleted successfully" });
 };
+
+// GET /api/categories/getDropdown
+export const categoryDropdown = async (req: Request, res: Response) => {
+  try {
+    const result = await categoryRepository.getDropdown();
+    res.json(result);
+  } catch (error) {
+    res.status(404).json({ message: "Failed to fetch categories dropdown" });
+  }
+};

@@ -2,6 +2,7 @@ import { Router } from "express";
 import { authenticate } from "../middleware/auth";
 import {
   createCustomer,
+  customerDropdown,
   deleteCustomer,
   getAllCustomers,
   getCustomerById,
@@ -10,9 +11,11 @@ import {
 
 const router = Router();
 
+router.get("/getDropdown", customerDropdown);
+
 router.get("/", getAllCustomers);
-router.get("/:id", getCustomerById);
 router.post("/", createCustomer);
+router.get("/:id", getCustomerById);
 router.put("/:id", updateCustomer);
 router.delete("/:id", deleteCustomer);
 

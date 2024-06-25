@@ -66,3 +66,13 @@ export const deleteCustomer = (req: Request, res: Response) => {
   customerRepository.delete(customerId);
   res.json({ message: "Customer deleted successfully" });
 };
+
+// GET /api/customers/getDropdown
+export const customerDropdown = async (req: Request, res: Response) => {
+  try {
+    const result = await customerRepository.getDropdown();
+    res.json(result);
+  } catch (error) {
+    res.status(404).json({ message: "Failed to fetch customers dropdown" });
+  }
+};

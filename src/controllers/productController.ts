@@ -66,3 +66,13 @@ export const deleteProduct = async (req: Request, res: Response) => {
 
   res.json({ message: "Product deleted successfully" });
 };
+
+// GET /api/products/getDropdown
+export const productDropdown = async (req: Request, res: Response) => {
+  try {
+    const result = await productRepository.getDropdown();
+    res.json(result);
+  } catch (error) {
+    res.status(404).json({ message: "Failed to fetch products dropdown" });
+  }
+};
